@@ -29,16 +29,17 @@ pipeline {
         }
 
         stage('Test') {
-            when {
-                anyOf {
-                    branch 'main'
-                    branch 'feature'
-                    branch 'feature/*'
-                }
-            }
-            steps {
-                bat 'dotnet test --no-build --verbosity normal'
-            }
+    when {
+        anyOf {
+            branch 'main'
+            branch 'feature'
+            branch 'feature/*'
         }
+    }
+    steps {
+        // Използваме вече инсталирания .NET 10 за тестове
+        bat 'dotnet test --no-build --framework net10.0 --verbosity normal'
+    }
+}
     }
 }
