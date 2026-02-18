@@ -37,9 +37,9 @@ pipeline {
         }
     }
     steps {
-        // Използваме вече инсталирания .NET 10 за тестове
-        bat 'dotnet test --no-build --framework net10.0 --verbosity normal'
+        bat 'dotnet test --no-build --framework net6.0 --verbosity normal'
     }
 }
+
     }
 }
