@@ -1,41 +1,44 @@
-stages {
-    stage('Restore') {
-        when {
-            anyOf {
-                branch 'main'
-                branch 'feature'
-                branch 'feature/*'
-            }
-        }
-        steps {
-            bat 'dotnet restore'
-        }
-    }
+pipeline {
+    agent any
 
-    stage('Build') {
-        when {
-            anyOf {
-                branch 'main'
-                branch 'feature'
-                branch 'feature/*'
+    stages {
+        stage('Restore') {
+            when {
+                anyOf {
+                    branch 'main'
+                    branch 'feature'
+                    branch 'feature/*'
+                }
+            }
+            steps {
+                bat 'dotnet restore'
             }
         }
-        steps {
-            bat 'dotnet build --no-restore'
-        }
-    }
 
-    stage('Test') {
-        when {
-            anyOf {
-                branch 'main'
-                branch 'feature'
-                branch 'feature/*'
+        stage('Build') {
+            when {
+                anyOf {
+                    branch 'main'
+                    branch 'feature'
+                    branch 'feature/*'
+                }
+            }
+            steps {
+                bat 'dotnet build --no-restore'
             }
         }
-        steps {
-            bat 'dotnet test --no-build --verbosity normal'
+
+        stage('Test') {
+            when {
+                anyOf {
+                    branch 'main'
+                    branch 'feature'
+                    branch 'feature/*'
+                }
+            }
+            steps {
+                bat 'dotnet test --no-build --verbosity normal'
+            }
         }
     }
 }
-
