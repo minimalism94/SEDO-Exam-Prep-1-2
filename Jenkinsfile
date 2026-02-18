@@ -7,7 +7,6 @@ pipeline {
                 anyOf {
                     branch 'main'
                     branch 'feature'
-                    branch 'feature/*'
                 }
             }
             steps {
@@ -20,7 +19,6 @@ pipeline {
                 anyOf {
                     branch 'main'
                     branch 'feature'
-                    branch 'feature/*'
                 }
             }
             steps {
@@ -33,11 +31,10 @@ pipeline {
         anyOf {
             branch 'main'
             branch 'feature'
-            branch 'feature/*'
         }
     }
     steps {
-        bat 'dotnet test --no-build --framework net6.0 --verbosity normal'
+        bat 'dotnet test --no-build --verbosity normal'
     }
 }
 
